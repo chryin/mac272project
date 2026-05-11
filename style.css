@@ -1,0 +1,92 @@
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f2f2f2;
+    margin: 0;
+    padding: 0;
+}
+
+header {
+    background-color: #e3f2fd;
+    padding: 20px;
+    text-align: center;
+    border-bottom: 2px solid #90caf9;
+}
+
+header h1 {
+    margin: 0;
+}
+
+nav ul {
+    list-style-type: none;
+    padding: 0;
+    margin-top: 10px;
+}
+
+nav ul li {
+    display: inline-block;
+    margin: 0 10px;
+}
+
+nav a {
+    text-decoration: none;
+    color: #0d47a1;
+    font-weight: bold;
+}
+
+section h2 {
+    color: #0d47a1;
+}
+
+#welcome {
+    padding: 20px;
+    text-align: center;
+}
+
+#quick-actions a {
+    display: inline-block;
+    margin: 10px;
+    padding: 10px 20px;
+    background-color: #bbdefb;
+    color: #0d47a1;
+    text-decoration: none;
+    border-radius: 5px;
+}
+
+.account-box {
+    background-color: white;
+    border: 1px solid #cccccc;
+    padding: 15px;
+    margin: 10px auto;
+    width: 80%;
+    max-width: 400px;
+    border-radius: 5px;
+}
+
+.account-box h3 {
+    margin-top: 0;
+    color: #0d47a1;
+}
+
+.account-box a {
+    text-decoration: none;
+    color: #0d47a1;
+    font-weight: bold;
+}
+
+#services {
+    background-color: #e3f2fd;
+    padding: 20px;
+}
+
+footer {
+    text-align: center;
+    padding: 15px;
+    background-color: #90caf9;
+    color: #0d47a1;
+    margin-top: 20px;
+}
+
+footer a {
+    color: #0d47a1;
+    text-decoration: none;
+}
