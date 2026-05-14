@@ -1,5 +1,10 @@
+<?php
+require 'db_setup.php';
+?>
+
 <!DOCTYPE html>
 <html>
+
 <head>
     <link rel="stylesheet" href="../../style.css">
 
@@ -71,9 +76,11 @@
 
     <footer>
         <p>2025 MAC172 Online Banking. All Rights Reserved.</p>
-        <p><a href="aboutpage.html">About</a> | <a href="contactpage.html">Contact</a> | <a href="termsofservicepage.html">Terms of Service</a></p>
+        <p><a href="aboutpage.html">About</a> | <a href="contactpage.html">Contact</a> | <a
+                href="termsofservicepage.html">Terms of Service</a></p>
     </footer>
     <script src="script.js"></script>
     <script src="homepage.js"></script>
 </body>
+
 </html>
