@@ -1,5 +1,10 @@
 <?php
+session_start();
 require 'db_setup.php';
+if (!isset($_SESSION['user_id'])) {
+    header("Location: login.php");
+    exit();
+}
 ?>
 
 <!DOCTYPE html>
@@ -19,7 +24,7 @@ require 'db_setup.php';
 
         <nav>
             <ul>
-                <li><a href="homepage.html">Home</a></li>
+                <li><a href="homepage.php">Home</a></li>
                 <li><a href="bankaccounts.html">Accounts</a></li>
                 <li><a href="sendmoney.html">Zelle2.0</a></li>
                 <li><a href="creditcards.html">Credit Cards</a></li>
@@ -79,8 +84,6 @@ require 'db_setup.php';
         <p><a href="aboutpage.html">About</a> | <a href="contactpage.html">Contact</a> | <a
                 href="termsofservicepage.html">Terms of Service</a></p>
     </footer>
-    <script src="script.js"></script>
-    <script src="homepage.js"></script>
 </body>
 
 </html>
