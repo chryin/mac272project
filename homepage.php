@@ -11,7 +11,7 @@ if (!isset($_SESSION['user_id'])) {
 <html>
 
 <head>
-    <link rel="stylesheet" href="../../style.css">
+    <link rel="stylesheet" href="style.css">
 
     <title>My Bank MAC172 Home</title>
 
@@ -45,6 +45,7 @@ if (!isset($_SESSION['user_id'])) {
             <a href="bankaccounts.html">View Accounts</a>
             <a href="sendmoney.html">Transfer Funds</a>
             <a href="sendmoney.html">Send Money</a>
+            <A href="submit_ticket.php">Create ticket</A>
         </div>
     </section>
 

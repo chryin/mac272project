@@ -33,7 +33,7 @@ mysqli_close($conn);
 
 <head>
     <title>Submit Ticket</title>
-    <link rel="stylesheet" href="../../style.css">
+    <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
@@ -119,6 +119,10 @@ mysqli_close($conn);
                 </tbody>
             </table>
         <?php endif; ?>
+    </div>
+
+    <div id="quick-actions">
+        <a href="homepage.php">Go back</a>
     </div>
 
 </body>
