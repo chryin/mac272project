@@ -3,7 +3,7 @@ const user = JSON.parse(localStorage.getItem("loggedInUser"));
 
 if (!user) {
     alert("Please log in first.");
-    window.location.href = "../login-signup/login.php";
+    window.location.href = "login.php";
 }
 //Load their account
 let accounts = JSON.parse(localStorage.getItem(`accounts_${user.username}`));
