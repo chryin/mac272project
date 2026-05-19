@@ -35,7 +35,7 @@ function signup() {
 
     localStorage.setItem(`accounts_${username}`, JSON.stringify(accounts));
 
-    window.location.href = "login.html";
+    window.location.href = "login.php";
 }
 
 function login() {
@@ -61,5 +61,5 @@ function login() {
     localStorage.setItem("loggedInUser", JSON.stringify(user));
 
     message.innerText = "Login successful!";
-    window.location.href = "homepage.html";
+    window.location.href = "homepage.php";
 }

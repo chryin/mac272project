@@ -11,14 +11,14 @@
 
     <nav>
         <ul>
-            <li><a href="homepage.html">Home</a></li>
-            <li><a href="bankaccounts.html">Accounts</a></li>
-            <li><a href="sendmoney.html">Zelle2.0</a></li>
-            <li><a href="creditcards.html">Credit Cards</a></li>
-            <li><a href="profile.html">Profile</a></li>
-            <li><a href="aboutpage.html">About</a></li>
-            <li><a href="contactpage.html">Contact</a></li>
-            <li><a href="termsofservicepage.html">Terms of Service</a></li>
+        <li><a href="homepage.php">Home</a></li>
+            <li><a href="bankaccounts.php">Accounts</a></li>
+            <li><a href="sendmoney.php">Zelle2.0</a></li>
+            <li><a href="creditcards.php">Credit Cards</a></li>
+            <li><a href="profile.php">Profile</a></li>
+            <li><a href="aboutpage.php">About</a></li>
+            <li><a href="contactpage.php">Contact</a></li>
+            <li><a href="termsofservicepage.php">Terms of Service</a></li>
         </ul>
     </nav>
 </header>
@@ -28,9 +28,9 @@
     <p>Manage your credit and debit cards, view balances, and perform card actions.</p>
 
     <div id="quick-actions">
-        <a href="bankaccounts.html">View Accounts</a>
-        <a href="sendmoney.html">Manage Transfers</a>
-        <a href="contactpage.html">Contact Support</a>
+        <a href="bankaccounts.php">View Accounts</a>
+        <a href="sendmoney.php">Manage Transfers</a>
+        <a href="contactpage.php">Contact Support</a>
     </div>
 </section>
 
@@ -45,8 +45,8 @@
         <p>CVV: 123</p>
         <p><strong>Outstanding Balance:</strong> $2,345.67</p>
         <p>
-            <a href="creditcards.html">View Transactions</a> &nbsp;|&nbsp;
-            <a href="sendmoney.html">Make a Payment</a>
+            <a href="creditcards.php">View Transactions</a> &nbsp;|&nbsp;
+            <a href="sendmoney.php">Make a Payment</a>
         </p>
     </div>
 
@@ -58,8 +58,8 @@
         <p>CVV: 456</p>
         <p><strong>Available Balance:</strong> $1,234.56</p>
         <p>
-            <a href="bankaccounts.html">View Transactions</a> &nbsp;|&nbsp;
-            <a href="profile.html">Report Lost/Stolen</a>
+            <a href="bankaccounts.php">View Transactions</a> &nbsp;|&nbsp;
+            <a href="profile.php">Report Lost/Stolen</a>
         </p>
     </div>
 </section>
@@ -77,7 +77,7 @@
 
 <footer>
     <p>2025 MAC172 Online Banking. All Rights Reserved.</p>
-    <p><a href="aboutpage.html">About</a> | <a href="contactpage.html">Contact</a> | <a href="termsofservicepage.html">Terms of Service</a></p>
+    <p><a href="aboutpage.php">About</a> | <a href="contactpage.php">Contact</a> | <a href="termsofservicepage.php">Terms of Service</a></p>
 </footer>
 </body>
 </html>
