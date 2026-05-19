@@ -3,7 +3,7 @@ const user = JSON.parse(localStorage.getItem("loggedInUser"));
 
 if (!user) {
     alert("You must log in first.");
-    window.location.href = "../login-signup/login.html";
+    window.location.href = "../login-signup/login.php";
 }
 
 //Load account balances

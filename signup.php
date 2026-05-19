@@ -62,7 +62,7 @@
         <br>
 
         <p style="text-align:center; margin-top:10px;">
-            <a href="login.html">Already have an account? Login</a>
+            <a href="login.php">Already have an account? Login</a>
         </p>
     </form>
 </div>

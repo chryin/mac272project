@@ -3,7 +3,7 @@ const user = JSON.parse(localStorage.getItem("loggedInUser"));
 
 if (!user) {
     alert("Please log in first.");
-    window.location.href = "login.html";
+    window.location.href = "login.php";
 }
 
 // Fill in profile fields
