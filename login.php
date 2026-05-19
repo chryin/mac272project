@@ -32,6 +32,9 @@
     <p style="text-align:center; margin-top:10px;">
         <a href="signup.php">Don't have an account? Sign Up</a>
     </p>
+    <p style="text-align:center; margin-top:10px;">
+        <a href="admin/admin_login.php">Admin Login</a>
+    </p>
 </div>
 
 <p id="message"></p>
