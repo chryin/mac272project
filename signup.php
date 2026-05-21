@@ -1,4 +1,5 @@
 <?php
+
 session_start();
 require 'config.php';
 
@@ -17,6 +18,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $input_username = trim($_POST['username'] ?? '');
     $input_password = $_POST['password'] ?? '';
     $address = trim($_POST['address'] ?? '');
+    $is_admin = isset($_POST['isAdmin']) ? 1 : 0;
 
     if (empty($first_name) || empty($last_name) || empty($email) || empty($input_username) || empty($input_password)) {
         $error = "Please fill in all required fields.";
@@ -32,9 +34,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         if (mysqli_fetch_assoc($check_result)) {
             $error = "Username or email already exists.";
         } else {
-            $sql = "INSERT INTO users (first_name, last_name, email, username, password, address) VALUES (?, ?, ?, ?, ?, ?)";
+            $sql = "INSERT INTO users (first_name, last_name, email, username, password, address, is_admin) VALUES (?,?, ?, ?, ?, ?, ?)";
             $stmt = mysqli_prepare($conn, $sql);
-            mysqli_stmt_bind_param($stmt, "ssssss", $first_name, $last_name, $email, $input_username, $input_password, $address);
+            mysqli_stmt_bind_param($stmt, "ssssssi", $first_name, $last_name, $email, $input_username, $input_password, $address, $is_admin);
 
             if (mysqli_stmt_execute($stmt)) {
                 mysqli_close($conn);
@@ -105,6 +107,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             <div class="form-group">
                 <label for="signupAddress">Address</label>
                 <textarea id="signupAddress" name="address" placeholder="Address"></textarea>
+            </div>
+            <br>
+
+            <div class="form-group">
+                <label>
+                    <input type="checkbox" id="signupIsAdmin" name="isAdmin" value="1">
+                    Sign up as admin
+                </label>
             </div>
             <br>
 

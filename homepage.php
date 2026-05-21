@@ -5,6 +5,13 @@ if (!isset($_SESSION['user_id'])) {
     header("Location: login.php");
     exit();
 }
+
+if (isset($_GET['logout'])) {
+    session_unset();
+    session_destroy();
+    header("Location: login.php");
+    exit();
+}
 ?>
 
 <!DOCTYPE html>
@@ -32,6 +39,7 @@ if (!isset($_SESSION['user_id'])) {
                 <li><a href="aboutpage.html">About</a></li>
                 <li><a href="contactpage.html">Contact</a></li>
                 <li><a href="termsofservicepage.html">Terms of Service</a></li>
+                <li><a href="?logout=1"><button>Logout</button></a></li>
 
             </ul>
         </nav>
@@ -46,6 +54,8 @@ if (!isset($_SESSION['user_id'])) {
             <a href="sendmoney.html">Transfer Funds</a>
             <a href="sendmoney.html">Send Money</a>
             <A href="submit_ticket.php">Create ticket</A>
+
+
         </div>
     </section>
 

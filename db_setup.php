@@ -38,9 +38,11 @@ $sql = "CREATE TABLE IF NOT EXISTS tickets (
     description TEXT NOT NULL,
     status ENUM('open','in_progress','resolved','closed') DEFAULT 'open',
     priority ENUM('low','medium','high') DEFAULT 'medium',
+    message VARCHAR(1500),
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
     FOREIGN KEY (user_id) REFERENCES users(id)
+
 )";
 
 mysqli_query($conn, $sql);

@@ -121,6 +121,12 @@ mysqli_close($conn);
         <?php endif; ?>
     </div>
 
+    <div class="account-box">
+        <div id="quick-actions">
+            <a href="chat_page.php">Send a message</a>
+        </div>
+    </div>
+
     <div id="quick-actions">
         <a href="homepage.php">Go back</a>
     </div>
