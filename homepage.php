@@ -24,14 +24,14 @@ if (!isset($_SESSION['user_id'])) {
 
         <nav>
             <ul>
-                <li><a href="homepage.php">Home</a></li>
-                <li><a href="bankaccounts.html">Accounts</a></li>
-                <li><a href="sendmoney.html">Zelle2.0</a></li>
-                <li><a href="creditcards.html">Credit Cards</a></li>
-                <li><a href="profile.html">Profile</a></li>
-                <li><a href="aboutpage.html">About</a></li>
-                <li><a href="contactpage.html">Contact</a></li>
-                <li><a href="termsofservicepage.html">Terms of Service</a></li>
+            <li><a href="homepage.php">Home</a></li>
+                <li><a href="bankaccounts.php">Accounts</a></li>
+                <li><a href="sendmoney.php">Zelle2.0</a></li>
+                <li><a href="creditcards.php">Credit Cards</a></li>
+                <li><a href="profile.php">Profile</a></li>
+                <li><a href="aboutpage.php">About</a></li>
+                <li><a href="contactpage.php">Contact</a></li>
+                <li><a href="termsofservicepage.php">Terms of Service</a></li>
 
             </ul>
         </nav>
