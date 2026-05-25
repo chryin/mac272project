@@ -1,3 +1,39 @@
+<?php
+session_start();
+require 'config.php';
+
+if (!isset($_SESSION['user_id'])) {
+    header("Location: login.php");
+    exit();
+}
+
+$profile = null;
+$profileError = '';
+$conn = mysqli_connect($servername, $username, $password, $dbname);
+
+if (!$conn) {
+    $profileError = 'Unable to load your profile right now.';
+} else {
+    $sql = "SELECT first_name, last_name, email, username, address FROM users WHERE id = ?";
+    $stmt = mysqli_prepare($conn, $sql);
+
+    if ($stmt) {
+        mysqli_stmt_bind_param($stmt, "i", $_SESSION['user_id']);
+        mysqli_stmt_execute($stmt);
+        $result = mysqli_stmt_get_result($stmt);
+        $profile = mysqli_fetch_assoc($result);
+        mysqli_stmt_close($stmt);
+
+        if (!$profile) {
+            $profileError = 'Profile information could not be found.';
+        }
+    } else {
+        $profileError = 'Unable to load your profile right now.';
+    }
+
+    mysqli_close($conn);
+}
+?>
 <!DOCTYPE html>
 <html>
 
@@ -37,13 +73,15 @@
         <div class="account-box">
             <h3>Personal Information</h3>
 
-            <p><strong>First Name:</strong> <span id="profileFirstName"></span></p>
-            <p><strong>Last Name:</strong> <span id="profileLastName"></span></p>
-            <p><strong>Email:</strong> <span id="profileEmail"></span></p>
-            <p><strong>Username:</strong> <span id="profileUsername"></span></p>
-            <p><strong>Address:</strong> <span id="profileAddress"></span></p>
-            <script src=script.js"></script>
-            <script src="profile.js"></script>
+            <?php if ($profileError !== ''): ?>
+                <p style="color: red;"><?php echo htmlspecialchars($profileError); ?></p>
+            <?php else: ?>
+                <p><strong>First Name:</strong> <span id="profileFirstName"><?php echo htmlspecialchars($profile['first_name']); ?></span></p>
+                <p><strong>Last Name:</strong> <span id="profileLastName"><?php echo htmlspecialchars($profile['last_name']); ?></span></p>
+                <p><strong>Email:</strong> <span id="profileEmail"><?php echo htmlspecialchars($profile['email']); ?></span></p>
+                <p><strong>Username:</strong> <span id="profileUsername"><?php echo htmlspecialchars($profile['username']); ?></span></p>
+                <p><strong>Address:</strong> <span id="profileAddress"><?php echo htmlspecialchars($profile['address'] ?: 'No address provided'); ?></span></p>
+            <?php endif; ?>
         </div>
     </section>
 

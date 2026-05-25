@@ -24,6 +24,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         if ($input_password === $row['password']) {
             $_SESSION['user_id'] = $row['id'];
             $_SESSION['is_admin'] = $row['is_admin'];
+
             mysqli_close($conn);
             header("Location: homepage.php");
             exit();

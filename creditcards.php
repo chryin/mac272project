@@ -1,3 +1,44 @@
+<?php
+session_start();
+require 'config.php';
+
+if (!isset($_SESSION['user_id'])) {
+    header("Location: login.php");
+    exit();
+}
+
+$cards = [];
+$cardError = '';
+$conn = mysqli_connect($servername, $username, $password, $dbname);
+
+if (!$conn) {
+    $cardError = 'Unable to load your cards right now.';
+} else {
+    $sql = "SELECT cards.card_id, cards.card_number, cards.card_type, cards.card_expiration,
+                   cards.card_cvv, cards.card_balance
+            FROM CreditCardsTable cards
+            INNER JOIN users ON users.username = cards.username
+            WHERE users.id = ?
+            ORDER BY cards.card_id DESC";
+    $stmt = mysqli_prepare($conn, $sql);
+
+    if ($stmt) {
+        mysqli_stmt_bind_param($stmt, "i", $_SESSION['user_id']);
+        mysqli_stmt_execute($stmt);
+        $result = mysqli_stmt_get_result($stmt);
+
+        while ($card = mysqli_fetch_assoc($result)) {
+            $cards[] = $card;
+        }
+
+        mysqli_stmt_close($stmt);
+    } else {
+        $cardError = 'Unable to load your cards right now.';
+    }
+
+    mysqli_close($conn);
+}
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -37,31 +78,25 @@
 <section id="overview">
     <h2>Card Overview</h2>
 
-    <div class="account-box">
-        <h3>Credit Card</h3>
-        <p>Card Type: Visa</p>
-        <p>Card Number: **** **** **** 4242</p>
-        <p>Expiration: 09/27</p>
-        <p>CVV: 123</p>
-        <p><strong>Outstanding Balance:</strong> $2,345.67</p>
-        <p>
-            <a href="creditcards.php">View Transactions</a> &nbsp;|&nbsp;
-            <a href="sendmoney.php">Make a Payment</a>
-        </p>
-    </div>
-
-    <div class="account-box">
-        <h3>Debit Card</h3>
-        <p>Card Type: Mastercard</p>
-        <p>Card Number: **** **** **** 6789</p>
-        <p>Expiration: 04/26</p>
-        <p>CVV: 456</p>
-        <p><strong>Available Balance:</strong> $1,234.56</p>
-        <p>
-            <a href="bankaccounts.php">View Transactions</a> &nbsp;|&nbsp;
-            <a href="contactpage.php">Report Lost/Stolen</a>
-        </p>
-    </div>
+    <?php if ($cardError !== ''): ?>
+        <p style="color: red; text-align: center;"><?php echo htmlspecialchars($cardError); ?></p>
+    <?php elseif (empty($cards)): ?>
+        <div class="account-box">
+            <p>You do not have any cards yet.</p>
+        </div>
+    <?php else: ?>
+        <?php foreach ($cards as $card): ?>
+            <div class="account-box">
+                <h3><?php echo htmlspecialchars($card['card_type']); ?> Card</h3>
+                <p>Card ID: <?php echo htmlspecialchars($card['card_id']); ?></p>
+                <p>Card Number: <?php echo htmlspecialchars($card['card_number']); ?></p>
+                <p>Expiration: <?php echo htmlspecialchars(date('m/y', strtotime($card['card_expiration']))); ?></p>
+                <p>CVV: <?php echo htmlspecialchars($card['card_cvv']); ?></p>
+                <p><strong>Balance:</strong> $<?php echo number_format((float) $card['card_balance'], 2); ?></p>
+                <p><a href="sendmoney.php">Make a Payment</a></p>
+            </div>
+        <?php endforeach; ?>
+    <?php endif; ?>
 </section>
 
 <section id="services">
