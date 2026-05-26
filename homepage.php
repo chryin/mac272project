@@ -12,6 +12,8 @@ if (isset($_GET['logout'])) {
     header("Location: login.php");
     exit();
 }
+
+$is_admin = !empty($_SESSION['is_admin']);
 ?>
 
 <!DOCTYPE html>
@@ -53,8 +55,11 @@ if (isset($_GET['logout'])) {
             <a href="bankaccounts.html">View Accounts</a>
             <a href="sendmoney.html">Transfer Funds</a>
             <a href="sendmoney.html">Send Money</a>
-            <A href="submit_ticket.php">Create ticket</A>
-
+            <?php if ($is_admin): ?>
+                <a href="inbox.php">Admin Dashboard</a>
+            <?php else: ?>
+                <a href="submit_ticket.php">Create ticket</a>
+            <?php endif; ?>
 
         </div>
     </section>
