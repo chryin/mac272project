@@ -8,6 +8,7 @@ if (!isset($_SESSION['user_id'])) {
 }
 
 $accounts = [];
+$transactions = [];
 $message = '';
 $conn = mysqli_connect($servername, $username, $password, $dbname);
 
@@ -118,6 +119,20 @@ $checkingAccounts = array_filter($accounts, function ($account) {
     return $account['account_type'] === 'checking';
 });
 
+$sql = "SELECT transactions.transaction_id, transactions.account_id, transactions.transaction_type,
+               transactions.amount, transactions.description, transactions.created_at
+        FROM TransactionsTable transactions
+        INNER JOIN AccountsTable accounts ON accounts.account_id = transactions.account_id
+        WHERE accounts.user_id = ?
+        ORDER BY transactions.created_at DESC";
+$stmt = mysqli_prepare($conn, $sql);
+mysqli_stmt_bind_param($stmt, "i", $_SESSION['user_id']);
+mysqli_stmt_execute($stmt);
+$result = mysqli_stmt_get_result($stmt);
+while ($transaction = mysqli_fetch_assoc($result)) {
+    $transactions[] = $transaction;
+}
+
 mysqli_close($conn);
 ?>
 <!DOCTYPE html>
@@ -206,6 +221,39 @@ mysqli_close($conn);
                     <?php endif; ?>
                 </div>
             <?php endforeach; ?>
+        <?php endif; ?>
+    </section>
+
+    <section id="transactions">
+        <h2>Transaction History</h2>
+
+        <?php if (empty($transactions)): ?>
+            <p style="text-align:center;">No transactions yet.</p>
+        <?php else: ?>
+            <table border="1" cellpadding="8" cellspacing="0" style="width: 95%; margin: 0 auto; background-color: white;">
+                <thead>
+                    <tr>
+                        <th>Transaction ID</th>
+                        <th>Account ID</th>
+                        <th>Transaction Type</th>
+                        <th>Amount</th>
+                        <th>Description</th>
+                        <th>Created At</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <?php foreach ($transactions as $transaction): ?>
+                        <tr>
+                            <td><?php echo htmlspecialchars($transaction['transaction_id']); ?></td>
+                            <td><?php echo htmlspecialchars($transaction['account_id']); ?></td>
+                            <td><?php echo htmlspecialchars($transaction['transaction_type']); ?></td>
+                            <td>$<?php echo number_format((float) $transaction['amount'], 2); ?></td>
+                            <td><?php echo htmlspecialchars($transaction['description']); ?></td>
+                            <td><?php echo htmlspecialchars($transaction['created_at']); ?></td>
+                        </tr>
+                    <?php endforeach; ?>
+                </tbody>
+            </table>
         <?php endif; ?>
     </section>
 
