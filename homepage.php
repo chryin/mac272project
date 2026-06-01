@@ -1,11 +1,36 @@
 <?php
 session_start();
-/*require 'db_setup.php';
+require 'config.php';
+
 if (!isset($_SESSION['user_id'])) {
     header("Location: login.php");
     exit();
 }
-    */
+
+$checkingBalance = 0.00;
+$savingsBalance = 0.00;
+$conn = mysqli_connect($servername, $username, $password, $dbname);
+
+if ($conn) {
+    $sql = "SELECT account_type, SUM(balance) AS total_balance
+            FROM AccountsTable
+            WHERE user_id = ?
+            GROUP BY account_type";
+    $stmt = mysqli_prepare($conn, $sql);
+    mysqli_stmt_bind_param($stmt, "i", $_SESSION['user_id']);
+    mysqli_stmt_execute($stmt);
+    $result = mysqli_stmt_get_result($stmt);
+
+    while ($account = mysqli_fetch_assoc($result)) {
+        if ($account['account_type'] === 'checking') {
+            $checkingBalance = (float) $account['total_balance'];
+        } elseif ($account['account_type'] === 'savings') {
+            $savingsBalance = (float) $account['total_balance'];
+        }
+    }
+
+    mysqli_close($conn);
+}
 ?>
 
 <!DOCTYPE html>
@@ -45,7 +70,6 @@ if (!isset($_SESSION['user_id'])) {
         <div id="quick-actions">
             <a href="bankaccounts.php">View Accounts</a>
             <a href="sendmoney.php">Transfer Funds</a>
-            <a href="sendmoney.php">Send Money</a>
             <A href="submit_ticket.php">Create ticket</A>
         </div>
     </section>
@@ -56,13 +80,13 @@ if (!isset($_SESSION['user_id'])) {
 
         <div class="account-box">
             <h3>Checking Account</h3>
-            <p><strong>Balance:</strong> $<span id="homeCheckingBalance">0.00</span></p>
+            <p><strong>Balance:</strong> $<span id="homeCheckingBalance"><?php echo number_format($checkingBalance, 2); ?></span></p>
             <a href="bankaccounts.php">View Details</a>
         </div>
 
         <div class="account-box">
             <h3>Savings Account</h3>
-            <p><strong>Balance:</strong> $<span id="homeSavingsBalance">0.00</span></p>
+            <p><strong>Balance:</strong> $<span id="homeSavingsBalance"><?php echo number_format($savingsBalance, 2); ?></span></p>
             <a href="bankaccounts.php">View Details</a>
         </div>
     </section>
